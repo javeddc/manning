@@ -89,6 +89,10 @@ $('#button').on('click', function(ev) {
     }
 
     $.ajax(settings).done(function(response) {
+      messageBox = $('#message_box')[0]
+      while (messageBox.firstChild) {
+        messageBox.removeChild(messageBox.firstChild);
+      }
       console.log(response);
       chats = JSON.parse(response);
       _.each(chats, function(chat) {
