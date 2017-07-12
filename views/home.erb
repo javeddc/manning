@@ -1,0 +1,20 @@
+<p>Currently logged in as: <%= @user %></p>
+
+<div id="chats_data" data-show="<%= @chats %>"> </div>
+
+<!-- chatsData = $("#chats_data").data("show"); -->
+
+<% @chats.each do |chat| %>
+
+<div class="comment <%= chat.origin %>">
+  <%= chat.body %>
+</div>
+
+<% end %>
+
+<%= @chats[-1].body %>
+
+<form action="/chat" method="post">
+  <input name="body">
+  <button>send</button>
+</form>
