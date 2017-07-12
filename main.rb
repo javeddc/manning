@@ -55,6 +55,8 @@ def get_response(input)
 end
 
 get '/' do
+  redirect '/login' unless session[:user_id]
+
   erb :index
 end
 
@@ -85,7 +87,7 @@ post '/session' do
   user = User.find_by(email: params[:email])
   if user && user.authenticate(params[:password]) then
     session[:user_id] = user.id
-    redirect '/home'
+    redirect '/'
   else
     erb :login
   end
