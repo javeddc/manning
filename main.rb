@@ -92,8 +92,8 @@ post '/session' do
 end
 
 get '/chat' do
-  return "hello"
-  # return Chat.where(user_id: session[:user_id])
+  # return Chat.find(session[:user_id]).email
+  return Chat.where(user_id: session[:user_id]).as_json.to_json
 end
 
 post '/chat' do

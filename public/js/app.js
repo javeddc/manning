@@ -83,7 +83,16 @@ $('#button').on('click', function(ev) {
 
   $.ajax(settings).done(function(response) {
     console.log(response);
-    var test = response
+    chats = JSON.parse(response);
+    _.each(chats, function(chat){
+      var currentDiv = document.createElement('div');
+      currentDiv.classList.add(chat.origin);
+      currentDiv.classList.add('message');
+      var currentP = document.createElement('p');
+      currentP.innerHTML = chat.body;
+      currentDiv.appendChild(currentP);
+      $('#message_box')[0].appendChild(currentDiv);
+    })
   });
 });
 
