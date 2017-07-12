@@ -36,7 +36,9 @@
 var getResponse = function(userInput) {
   var settings = {
     url: 'http://localhost:4567/response',
-    data: { input: userInput }
+    data: {
+      input: userInput
+    }
   }
   var output
   $.ajax(settings).done(function(response) {
@@ -78,22 +80,28 @@ var form = document.querySelector('form');
 $('#button').on('click', function(ev) {
   var settings = {
     url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
-    // data: { t: input.value, apikey: '2f6435d9' }
+    data: { body: $('#userInput')[0].value }
   }
+  $.post(settings).done(function() {
+    var settings = {
+      url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
+      // data: { t: input.value, apikey: '2f6435d9' }
+    }
 
-  $.ajax(settings).done(function(response) {
-    console.log(response);
-    chats = JSON.parse(response);
-    _.each(chats, function(chat){
-      var currentDiv = document.createElement('div');
-      currentDiv.classList.add(chat.origin);
-      currentDiv.classList.add('message');
-      var currentP = document.createElement('p');
-      currentP.innerHTML = chat.body;
-      currentDiv.appendChild(currentP);
-      $('#message_box')[0].appendChild(currentDiv);
-    })
-  });
+    $.ajax(settings).done(function(response) {
+      console.log(response);
+      chats = JSON.parse(response);
+      _.each(chats, function(chat) {
+        var currentDiv = document.createElement('div');
+        currentDiv.classList.add(chat.origin);
+        currentDiv.classList.add('message');
+        var currentP = document.createElement('p');
+        currentP.innerHTML = chat.body;
+        currentDiv.appendChild(currentP);
+        $('#message_box')[0].appendChild(currentDiv);
+      })
+    });
+  })
 });
 
 

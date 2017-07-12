@@ -101,8 +101,8 @@ post '/chat' do
 
   c1 = Chat.new(body: params[:body], user_id: User.find(session[:user_id]).id, origin: 'user', time_stamp: Time.now )
   c1.save
-  c2 = Chat.new(body: get_response(params[:body]), user_id: User.find(session[:user_id]).id, origin: 'app', time_stamp: Time.now )
-  c2.save
+  # c2 = Chat.new(body: get_response(params[:body]), user_id: User.find(session[:user_id]).id, origin: 'app', time_stamp: Time.now )
+  # c2.save
   redirect "/home"
 end
 
