@@ -38,4 +38,4 @@ INSERT INTO chats(body, user_id, origin) VALUES ('Hey there.', 2, 'app');
 INSERT INTO chats(body, user_id, origin) VALUES ('Hi', 2, 'user');
 INSERT INTO chats(body, user_id, origin) VALUES ('Do you want to set some goals?', 2, 'app');
 INSERT INTO chats(body, user_id, origin) VALUES ('Yes', 2, 'user');
-INSERT INTO chats(body, user_id, origin, buttons) VALUES ('Long term or short term?', 2, 'app', "['Long term', 'Short term']");
+INSERT INTO chats(body, user_id, origin, buttons) VALUES ('Long term or short term?', 2, 'app', '[Long term, Short term]');
