@@ -77,7 +77,7 @@ var form = document.querySelector('form');
 
 $('#button').on('click', function(ev) {
   var settings = {
-    url: 'http://afternoon-dawn-85391.herokuapp.com/chat'
+    url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
     // data: { t: input.value, apikey: '2f6435d9' }
   }
 
