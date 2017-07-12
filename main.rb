@@ -92,7 +92,8 @@ post '/session' do
 end
 
 get '/chat' do
-  return Chat.where(user_id: session[:user_id])
+  return "hello"
+  # return Chat.where(user_id: session[:user_id])
 end
 
 post '/chat' do
