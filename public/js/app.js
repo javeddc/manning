@@ -73,7 +73,7 @@ var form = document.querySelector('form');
 // 	parent.appendChild(newP);
 // }
 
-});
+// });
 
 $('#button').on('click', function(ev) {
   var settings = {
@@ -85,7 +85,7 @@ $('#button').on('click', function(ev) {
     console.log(response);
     var test = response
   });
-})
+});
 
 
 // function loadXMLDoc() {
