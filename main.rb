@@ -91,6 +91,10 @@ post '/session' do
   end
 end
 
+get '/chat' do
+  return Chat.where(user_id: session[:user_id])
+end
+
 post '/chat' do
   redirect '/login' unless session[:user_id]
 
