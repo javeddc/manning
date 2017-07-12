@@ -79,7 +79,7 @@ var form = document.querySelector('form');
 
 $('#button').on('click', function(ev) {
   var settings = {
-    url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
+    url: 'https://afternoon-dawn-85391.herokuapp.com/chat',
     data: { body: $('#userInput')[0].value }
   }
   $.post(settings).done(function() {
