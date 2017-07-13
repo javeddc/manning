@@ -1,16 +1,92 @@
-.user {
-  background-color: skyblue;
-  text-align: right;
+h1 {
+  background-color: 
 }
 
 .app {
-  background-color: mistyrose;
+  height: 3em;  
+  width: 14em; 
+  border-radius: 40px;  
+  background-color: #E0E0E4;
+  margin-bottom: 1em;
+  
+}
+
+.user {
+height: 3em;  
+width: 14em; 
+border-radius: 40px;  
+background-color: #87888C;  
+background: linear-gradient(90deg, #72D989 0%, #72D9D2 100%);
+align-self: flex-end;
+margin-bottom: 1em;
+}
+
+#message_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.message {
   text-align: left;
 }
 
+p {
+  padding-left: 10px;
+}
 
 .container {
   width: 100%;
   height: 100%;
-  background-color: mistyrose;
+  /*width: 330px;
+  background-color: mistyrose;*/
+}
+
+.ui {
+  height: 3em;  
+  width: 14em; 
+  border-radius: 40px;  
+  background-color: #E0E0E4;
+  margin-bottom: 1em;
+  /*display: flex;
+  flex-direction: row;
+  justify-content: center;*/
+}
+
+.ui_row {
+  margin-bottom: 0;
+}
+
+#userInput {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid hsla(116, 100%, 0%, 0.2);
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+button {
+  display: inline-block;
+  margin: 0.5em;
+  border: 1px solid hsla(116, 100%, 0%, 0.2);
+  border-radius: 2em;
+  color: hsla(116, 100%, 0%, 0.3);
+  padding: 1em;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 0.7em;
+  min-width: 3em;
+}
+
+button:hover {
+  background-color: hsla(116, 100%, 100%, 0.5);
+  color: hsla(116, 100%, 0%, 0.6);
+  border: 1px solid hsla(116, 100%, 0%, 0.4);
+}
+
+button:focus, input:focus {
+  outline: 0;
 }
