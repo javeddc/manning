@@ -17,13 +17,13 @@ var getChats = function() {
     chats = JSON.parse(response);
     console.log(chats);
     _.each(chats, function(chat) {
-        var currentDiv = document.createElement('div');
-        currentDiv.classList.add(chat.origin);
-        currentDiv.classList.add('message');
-        var currentP = document.createElement('p');
-        currentP.innerHTML = chat.body;
-        currentDiv.appendChild(currentP);
-        $('#message_box')[0].appendChild(currentDiv);
+      var currentDiv = document.createElement('div');
+      currentDiv.classList.add(chat.origin);
+      currentDiv.classList.add('message');
+      var currentP = document.createElement('p');
+      currentP.innerHTML = chat.body;
+      currentDiv.appendChild(currentP);
+      $('#message_box')[0].appendChild(currentDiv);
     })
     if (chats[chats.length - 1].origin == 'ui') {
       chat = chats[chats.length - 1];
@@ -35,8 +35,12 @@ var getChats = function() {
         var currentBtn = document.createElement('button');
         currentBtn.classList.add('ui_button');
         currentBtn.innerHTML = buttonStr;
-        currentBtn.onclick =
-          'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_')
+        // currentBtn.onclick = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_');
+        stringParse = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_') + '()';
+        stringCommand = eval(stringParse);
+        console.log(stringCommand);
+        // currentBtn.onclick = eval('function() {' + stringParse + '};');
+        currentBtn.onclick = function() { eval(stringParse); };
         currentDiv.appendChild(currentBtn);
       })
       $('#message_box')[0].appendChild(currentDiv);
@@ -66,7 +70,13 @@ $('#button').on('click', function(ev) {
 
 var dbInterface = {
   postGoal: function(goalName) {},
-  getGoals: function() {}
+  getGoals: function() {},
+  long_term: function() {
+    console.log('yeahh');
+  },
+  short_term: function() {
+    console.log('ung');
+  }
 }
 
 
