@@ -77,37 +77,78 @@ var form = document.querySelector('form');
 
 // });
 
-$('#button').on('click', function(ev) {
+var getChats = function() {
+  var settings = {
+    url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
+  }
+  $.ajax(settings).done(function(response) {
+    messageBox = $('#message_box')[0]
+    while (messageBox.firstChild) {
+      messageBox.removeChild(messageBox.firstChild);
+    }
+    console.log(response);
+    chats = JSON.parse(response);
+    console.log(chats);
+    _.each(chats, function(chat) {
+      var currentDiv = document.createElement('div');
+      currentDiv.classList.add(chat.origin);
+      currentDiv.classList.add('message');
+      var currentP = document.createElement('p');
+      currentP.innerHTML = chat.body;
+      currentDiv.appendChild(currentP);
+      $('#message_box')[0].appendChild(currentDiv);
+    })
+  });
+}
+
+var postChat(chatInput) {
   var settings = {
     url: 'https://afternoon-dawn-85391.herokuapp.com/chat',
-    data: { body: $('#userInput')[0].value }
-  }
-  $.post(settings).done(function() {
-    var settings = {
-      url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
-      // data: { t: input.value, apikey: '2f6435d9' }
+    data: {
+      body: chatInput
     }
+  }
+  $.post(settings)
+}
 
-    $.ajax(settings).done(function(response) {
-      messageBox = $('#message_box')[0]
-      while (messageBox.firstChild) {
-        messageBox.removeChild(messageBox.firstChild);
-      }
-      console.log(response);
-      chats = JSON.parse(response);
-      console.log(chats);
-      _.each(chats, function(chat) {
-        var currentDiv = document.createElement('div');
-        currentDiv.classList.add(chat.origin);
-        currentDiv.classList.add('message');
-        var currentP = document.createElement('p');
-        currentP.innerHTML = chat.body;
-        currentDiv.appendChild(currentP);
-        $('#message_box')[0].appendChild(currentDiv);
-      })
-    });
-  })
+$('#button').on('click', function(ev) {
+  postChat($('#userInput')[0].value);
+  getChats();
 });
+
+// $('#button').on('click', function(ev) {
+//   var settings = {
+//     url: 'https://afternoon-dawn-85391.herokuapp.com/chat',
+//     data: {
+//       body: $('#userInput')[0].value
+//     }
+//   }
+//   $.post(settings).done(function() {
+//     var settings = {
+//       url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
+//       // data: { t: input.value, apikey: '2f6435d9' }
+//     }
+//
+//     $.ajax(settings).done(function(response) {
+//       messageBox = $('#message_box')[0]
+//       while (messageBox.firstChild) {
+//         messageBox.removeChild(messageBox.firstChild);
+//       }
+//       console.log(response);
+//       chats = JSON.parse(response);
+//       console.log(chats);
+//       _.each(chats, function(chat) {
+//         var currentDiv = document.createElement('div');
+//         currentDiv.classList.add(chat.origin);
+//         currentDiv.classList.add('message');
+//         var currentP = document.createElement('p');
+//         currentP.innerHTML = chat.body;
+//         currentDiv.appendChild(currentP);
+//         $('#message_box')[0].appendChild(currentDiv);
+//       })
+//     });
+//   })
+// });
 
 
 window.onload = function() {
