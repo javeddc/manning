@@ -108,6 +108,13 @@ post '/chat' do
   redirect "/home"
 end
 
+post '/ui' do
+  redirect '/login' unless session[:user_id]
+  c1 = Chat.new(body: params[:body], user_id: User.find(session[:user_id]).id, origin: params[:origin], time_stamp: Time.now )
+  c1.save
+  redirect "/home"
+end
+
 
 delete '/session' do
   session[:user_id] = nil

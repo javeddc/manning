@@ -54,12 +54,24 @@ window.onload = function() {
 
 var postChat = function(chatInput) {
   var settings = {
-    url: 'https://afternoon-dawn-85391.herokuapp.com/chat',
+    url: '/chat',
     data: {
       body: chatInput
     }
   }
   $.post(settings)
+}
+
+var postUI = function(bodyIn, originIn, buttonsIn) {
+  var settings = {
+    url: '/chat',
+    data: {
+      body: bodyIn,
+      origin: originIn,
+      buttons: buttonsIn
+    }
+  }
+  $.post(settings);
 }
 
 $('#button').on('click', function(ev) {
@@ -79,6 +91,9 @@ var dbInterface = {
   }
 }
 
+var dbChats = {
+
+}
 
 
 
