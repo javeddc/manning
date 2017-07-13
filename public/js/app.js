@@ -20,7 +20,7 @@ var getChats = function() {
         var currentDiv = document.createElement('div');
         currentDiv.classList.add(chat.origin);
         currentDiv.classList.add('ui_row');
-        var currentBtn = document.createElement('btn');
+        var currentBtn = document.createElement('button');
         console.log(chat.body);
         currentBtn.classList.add('ui_button');
         currentBtn.innerHTML = chat.body;
