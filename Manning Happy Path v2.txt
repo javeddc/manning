@@ -1,0 +1,19 @@
+Hey there, how you goin’? I’m Manning and I’m here to help you achieve your professional, physical, and personal goals.
+
+Let’s get started!
+
+How you goin’?|[Great, Not So Good, Not Sure]
+
+Great|[Awesome! Let’s help you set some goals.]
+
+Let’s choose a goal type.|[Professional, Physical, Personal]
+
+How long?|[1 week, 1 month, 1 year, 3 years]
+
+3 years|[What is your goal?]
+
+To be a Senior Computer Engineer in 3 years.|[That’s a great long-term goal, let’s break that into shorter-term goals for yourself.]
+
+Let’s choose a timeframe for your short-term goals.|[1 month, 3 months, 6 months]
+
+Fantastic, you’ve set out a path for yourself to achieve success. Keep on coming back to keep yourself on track to accomplishing your goals.
