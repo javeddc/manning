@@ -101,7 +101,7 @@ var getChats = function() {
   });
 }
 
-var postChat(chatInput) {
+var postChat = function(chatInput) {
   var settings = {
     url: 'https://afternoon-dawn-85391.herokuapp.com/chat',
     data: {
