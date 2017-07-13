@@ -17,20 +17,6 @@ var getChats = function() {
     chats = JSON.parse(response);
     console.log(chats);
     _.each(chats, function(chat) {
-      if (chat.origin == 'ui') {
-        var currentDiv = document.createElement('div');
-        currentDiv.classList.add(chat.origin);
-        currentDiv.classList.add('ui_row');
-        var currentBtn = document.createElement('button');
-        console.log(chat.body);
-        currentBtn.classList.add('ui_button');
-        currentBtn.innerHTML = chat.body;
-        currentBtn.onclick = function() {
-          console.log('yo i am the working');
-        };
-        currentDiv.appendChild(currentBtn);
-        $('#message_box')[0].appendChild(currentDiv);
-      } else {
         var currentDiv = document.createElement('div');
         currentDiv.classList.add(chat.origin);
         currentDiv.classList.add('message');
@@ -38,8 +24,23 @@ var getChats = function() {
         currentP.innerHTML = chat.body;
         currentDiv.appendChild(currentP);
         $('#message_box')[0].appendChild(currentDiv);
-      }
     })
+    if (chats[chats.length - 1].origin == 'ui') {
+      chat = chats[chats.length - 1];
+      var currentDiv = document.createElement('div');
+      currentDiv.classList.add(chat.origin);
+      currentDiv.classList.add('ui_row');
+      buttons = chat.buttons.split(',');
+      _.each(buttons, function(buttonStr) {
+        var currentBtn = document.createElement('button');
+        currentBtn.classList.add('ui_button');
+        currentBtn.innerHTML = buttonStr;
+        currentBtn.onclick =
+          'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_')
+        currentDiv.appendChild(currentBtn);
+      })
+      $('#message_box')[0].appendChild(currentDiv);
+    }
   });
 }
 
@@ -62,10 +63,6 @@ $('#button').on('click', function(ev) {
   getChats();
 });
 
-
-var buttonAction = function(actionName) {
-  postChat(actionName);
-}
 
 var dbInterface = {
   postGoal: function(goalName) {},
