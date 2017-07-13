@@ -16,34 +16,42 @@ var getChats = function() {
     console.log(response);
     chats = JSON.parse(response);
     console.log(chats);
-    _.each(chats, function(chat) {
-      var currentDiv = document.createElement('div');
-      currentDiv.classList.add(chat.origin);
-      currentDiv.classList.add('message');
-      var currentP = document.createElement('p');
-      currentP.innerHTML = chat.body;
-      currentDiv.appendChild(currentP);
-      $('#message_box')[0].appendChild(currentDiv);
-    })
-    if (chats[chats.length - 1].origin == 'ui') {
-      chat = chats[chats.length - 1];
-      var currentDiv = document.createElement('div');
-      currentDiv.classList.add(chat.origin);
-      currentDiv.classList.add('ui_row');
-      buttons = chat.buttons.split(',');
-      _.each(buttons, function(buttonStr) {
-        var currentBtn = document.createElement('button');
-        currentBtn.classList.add('ui_button');
-        currentBtn.innerHTML = buttonStr;
-        // currentBtn.onclick = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_');
-        stringParse = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_') + '()';
-        stringCommand = eval(stringParse);
-        console.log(stringCommand);
-        // currentBtn.onclick = eval('function() {' + stringParse + '};');
-        currentBtn.onclick = function() { eval(stringParse); };
-        currentDiv.appendChild(currentBtn);
+    if (chats.length == 0) {
+      postUI(uiChats.intro)
+    } else {
+      _.each(chats, function(chat) {
+        var currentDiv = document.createElement('div');
+        currentDiv.classList.add(chat.origin);
+        currentDiv.classList.add('message');
+        var currentP = document.createElement('p');
+        currentP.innerHTML = chat.body;
+        currentDiv.appendChild(currentP);
+        $('#message_box')[0].appendChild(currentDiv);
       })
-      $('#message_box')[0].appendChild(currentDiv);
+      if (chats[chats.length - 1].origin == 'ui') {
+        chat = chats[chats.length - 1];
+        var currentDiv = document.createElement('div');
+        currentDiv.classList.add(chat.origin);
+        currentDiv.classList.add('ui_row');
+        buttons = chat.buttons.split(',');
+        _.each(buttons, function(buttonStr) {
+          var currentBtn = document.createElement('button');
+          currentBtn.classList.add('ui_button');
+          currentBtn.innerHTML = buttonStr;
+          // currentBtn.onclick = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_');
+          stringParse = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_') + '()';
+          console.log(stringParse);
+          // stringCommand = eval(stringParse);
+          // console.log(stringCommand);
+          // currentBtn.onclick = eval('function() {' + stringParse + '};');
+          currentBtn.onclick = function() {
+            postChat(buttonStr);
+            eval(stringParse);
+          };
+          currentDiv.appendChild(currentBtn);
+        })
+        $('#message_box')[0].appendChild(currentDiv);
+      }
     }
   });
 }
@@ -62,16 +70,18 @@ var postChat = function(chatInput) {
   $.post(settings)
 }
 
-var postUI = function(bodyIn, originIn, buttonsIn) {
+var postUI = function(inputObj) {
   var settings = {
-    url: '/chat',
+    url: '/ui',
     data: {
-      body: bodyIn,
-      origin: originIn,
-      buttons: buttonsIn
+      body: inputObj.body,
+      origin: inputObj.origin,
+      buttons: inputObj.buttons
     }
   }
-  $.post(settings);
+  $.post(settings).done(function() {
+    getChats()
+  });
 }
 
 $('#button').on('click', function(ev) {
@@ -85,14 +95,53 @@ var dbInterface = {
   getGoals: function() {},
   long_term: function() {
     console.log('yeahh');
+    postUI(uiChats.awesome);
   },
   short_term: function() {
     console.log('ung');
+    postUI(uiChats.awesome);
+  },
+  great: function() {
+    // console.log('sdkjf');
+    postUI(uiChats.awesome);
+    postUI(uiChats.goal_type);
+
+  },
+  not_so_good: function() {
+    postUI(uiChats.awesome);
+    postUI(uiChats.goal_type);
+  },
+  not_sure: function() {
+
+  },
+  professional: function() {
+
+  },
+  physical: function() {
+
+  },
+  personal: function() {
+
   }
+
 }
 
-var dbChats = {
-
+// body, origin, buttons
+var uiChats = {
+  intro: {
+    body: "Hello. How are you?",
+    origin: "ui",
+    buttons: 'Great,Not So Good,Not Sure'
+  },
+  awesome: {
+    body: "Awesome. To stay feeling great, it can help to have some goals for the future. If you tell me a few things, I can help keep track of your goals for you and check in on your progress.",
+    origin: 'app'
+  },
+  goal_type: {
+    body: "Imagine a goal you want to have achieved in the future. First, tell me what kind of goal this is.",
+    origin: "ui",
+    buttons: 'Professional,Physical,Personal'
+  }
 }
 
 
