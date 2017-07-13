@@ -2,17 +2,21 @@ Hey there, how you goin’? I’m Manning and I’m here to help you achieve you
 
 Let’s get started!
 
-How you goin’?|[Great, Not So Good, Not Sure]
+How you goin’?|['Great', 'Not So Good', 'Not Sure']
 
 Great|[Awesome! Let’s help you set some goals.]
 
+
+
 Let’s choose a goal type.|[Professional, Physical, Personal]
+
+[What is your goal?] That’s a great long-term goal
 
 How long?|[1 week, 1 month, 1 year, 3 years]
 
-3 years|[What is your goal?]
+3 years|
 
-To be a Senior Computer Engineer in 3 years.|[That’s a great long-term goal, let’s break that into shorter-term goals for yourself.]
+To be a Senior Computer Engineer in 3 years.|[, let’s break that into shorter-term goals for yourself.]
 
 Let’s choose a timeframe for your short-term goals.|[1 month, 3 months, 6 months]
 

@@ -1,7 +1,7 @@
 var btn = document.querySelector('#button');
 var parent = document.querySelector('#parent');
 var form = document.querySelector('form');
-
+var goal = '';
 
 var getChats = function() {
   var settings = {
@@ -31,7 +31,7 @@ var getChats = function() {
       if (chats[chats.length - 1].origin == 'ui') {
         chat = chats[chats.length - 1];
         var currentDiv = document.createElement('div');
-        currentDiv.classList.add(chat.origin);
+
         currentDiv.classList.add('ui_row');
         buttons = chat.buttons.split(',');
         _.each(buttons, function(buttonStr) {
@@ -39,7 +39,7 @@ var getChats = function() {
           currentBtn.classList.add('ui_button');
           currentBtn.innerHTML = buttonStr;
           // currentBtn.onclick = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_');
-          stringParse = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_') + '()';
+          var stringParse = 'dbInterface.' + buttonStr.toLowerCase().replace(' ', '_') + '()';
           console.log(stringParse);
           // stringCommand = eval(stringParse);
           // console.log(stringCommand);
@@ -94,33 +94,57 @@ var dbInterface = {
   postGoal: function(goalName) {},
   getGoals: function() {},
   long_term: function() {
-    console.log('yeahh');
-    postUI(uiChats.awesome);
+
+
   },
   short_term: function() {
-    console.log('ung');
-    postUI(uiChats.awesome);
+
+
   },
   great: function() {
     // console.log('sdkjf');
-    postUI(uiChats.awesome);
-    postUI(uiChats.goal_type);
+    // postUI(uiChats.awesome);
+    setTimeout(function(){ postUI(uiChats.awesome); }, 200);
+    setTimeout(function(){ postUI(uiChats.goal_type); }, 900);
+
 
   },
   not_so_good: function() {
-    postUI(uiChats.awesome);
-    postUI(uiChats.goal_type);
+
+
   },
   not_sure: function() {
 
   },
   professional: function() {
+    postUI(uiChats.professional);
+    setTimeout(function(){ postUI(uiChats.tell_goal); }, 900);
+    setTimeout(function(){ btn.addEventListener('click', function() {
+      goal = $('#userInput')[0].value;
+      goalObj = {};
+      goalObj.body = "So you want to " + goal.replace('I want to ', '').replace('i want to ', '') + ". That's awesome.";
+      goalObj.origin = 'app';
+      postUI(goalObj);
+      $('#userInput')[0].value = '';
+      setTimeout(function(){ postUI(uiChats.goal_timeframe); }, 400);
+    }); }, 900);
 
+
+    // setTimeout(function(){ postUI(uiChats.goal_timeframe); }, 900);
   },
   physical: function() {
 
   },
   personal: function() {
+
+  },
+  a_month: function() {
+
+  },
+  a_year: function() {
+
+  },
+  three_years: function() {
 
   }
 
@@ -129,7 +153,7 @@ var dbInterface = {
 // body, origin, buttons
 var uiChats = {
   intro: {
-    body: "Hello. How are you?",
+    body: "Hey. How\'s it going today?",
     origin: "ui",
     buttons: 'Great,Not So Good,Not Sure'
   },
@@ -141,6 +165,18 @@ var uiChats = {
     body: "Imagine a goal you want to have achieved in the future. First, tell me what kind of goal this is.",
     origin: "ui",
     buttons: 'Professional,Physical,Personal'
+  },
+  professional: {
+    body: "Cool. Having professional goals can help make your work more meaningful. ", origin: 'app'
+  },
+  goal_timeframe: {
+    body: "Pick a timeframe for achieving this goal. Make it achievable, and be generous.",
+    origin: "ui",
+    buttons: 'A month,A year,Three years'
+    },
+  tell_goal: {
+    body: "Tell me in a few words what this goal is. You can say 'I want to...'",
+    origin: "app"
   }
 }
 
