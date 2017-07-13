@@ -7,3 +7,17 @@
   background-color: mistyrose;
   text-align: left;
 }
+
+.button {
+	padding: 15px 25px;
+	background: #0d6b32;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px black;
+  text-decoration-line: none;
+  clear: both;
+  margin-right: 30px;
+}
