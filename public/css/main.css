@@ -1,11 +1,17 @@
+
 .user {
   background-color: skyblue;
   text-align: right;
 }
-
 .app {
   background-color: mistyrose;
   text-align: left;
+}
+.container {
+  /*width: 100px;*/
+  /*height: 100%;*/
+  width: 330px;
+  background-color: mistyrose;
 }
 
 .button {

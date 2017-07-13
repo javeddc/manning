@@ -95,6 +95,7 @@ $('#button').on('click', function(ev) {
       }
       console.log(response);
       chats = JSON.parse(response);
+      console.log(chats);
       _.each(chats, function(chat) {
         var currentDiv = document.createElement('div');
         currentDiv.classList.add(chat.origin);
