@@ -5,7 +5,8 @@ var form = document.querySelector('form');
 
 var getChats = function() {
   var settings = {
-    url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
+    // url: 'https://afternoon-dawn-85391.herokuapp.com/chat'
+    url: '/chat'
   }
   $.ajax(settings).done(function(response) {
     messageBox = $('#message_box')[0]
@@ -25,8 +26,8 @@ var getChats = function() {
         currentBtn.classList.add('ui_button');
         currentBtn.innerHTML = chat.body;
         currentBtn.onclick = function() {
-          console.log('yo' + chat.body);
-        }
+          console.log('yo i am the working');
+        };
         currentDiv.appendChild(currentBtn);
         $('#message_box')[0].appendChild(currentDiv);
       } else {
